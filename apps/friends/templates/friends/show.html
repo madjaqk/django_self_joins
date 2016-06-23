@@ -17,7 +17,7 @@
 				<th>Action</th>
 			</tr>
 			{% for other in all_users %}
-				{% if other not in user.friends.all %}
+				{% if other not in user.friends.all %} {# This is probably an inefficient way to do this loop #}
 					<tr>
 						<td>{{other.name}}</td>
 						<td>
