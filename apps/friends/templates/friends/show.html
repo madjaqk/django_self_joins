@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Friends Show</title>
+	</head>
+	<body>
+		<h1>{{user.name}}</h1>
+		<h3>Friends:</h3>
+		<ul>
+			{% for friend in user.friends.all %}
+				<li>{{friend.name}}</li>
+			{% endfor %}
+		</ul>
+		<h3>All Users:</h3>
+		<table>
+			<tr><th>Name</th>
+				<th>Action</th>
+			</tr>
+			{% for other in all_users %}
+				{% if other not in user.friends.all %}
+					<tr>
+						<td>{{other.name}}</td>
+						<td>
+							<form action="{% url 'update' %}" method="post">
+								{% csrf_token %}
+								<input type="hidden" name="user" value="{{user.id}}">
+								<input type="hidden" name="other" value="{{other.id}}">
+								<input type="submit" value="Add Friend">
+							</form>
+						</td>
+					<tr>
+				{% endif %}
+			{% endfor %}
+		</table>
+		<a href="{% url 'index' %}">Back</a>
+	</body>
+</html>

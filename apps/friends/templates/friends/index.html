@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Friends Index</title>
+	</head>
+	<body>
+		<h1>Users</h1>
+		<ul>
+			{% for user in users %}
+				<li><a href="{% url 'show' id=user.id %}">{{user.name}}</a></li>
+			{% endfor %}
+		</ul>
+
+		<form action="{% url 'create' %}" method="post">
+			{% csrf_token %}
+			<p>Name: <input type="text" name="name"></p>
+			<input type="submit" value="create">
+		</form>
+	</body>
+</html>
